@@ -10,6 +10,7 @@ def calcular_imc():
     
     imc = peso / (altura**2)
     imc = round (imc,2)
+    
 
     resultado_imc.configure(text=imc)
     #resultado_texto = ''
@@ -24,7 +25,7 @@ def calcular_imc():
                                     text_color=("#078007", "#3CE625"))
     elif imc < 30:
         #resultado_texto = ('Sobrepeso')
-        classificacao_imc.configure(text='Sobrepeso',
+        classificacao_imc.configure(text='Sobrepeso ',
                                     text_color=("#C2B00F", "#F0EC02"))
     elif imc < 35:
         #resultado_texto = ('Obesidade 1')
