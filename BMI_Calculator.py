@@ -1,79 +1,83 @@
 import customtkinter as ctk 
 
-#Configuração da aparência
+# Appearance configuration
 ctk.set_appearance_mode('dark')
 
-#Criação das funções de funcionalidades
-def calcular_imc():
-    peso = float(campo_peso.get())
-    altura = float(campo_altura.get())
+# Functionality functions
+def calculate_bmi():
+    try:
+        
+        weight = float(weight_entry.get())
+        height = float(height_entry.get())
+        
+        if height <= 0:
+            bmi_result.configure(text="Erro")
+            bmi_classification.configure(text='Altura inválida!', text_color='red')
+            return
+        
+        bmi = weight / (height**2)
+        bmi = round(bmi, 2)
+        
+        bmi_result.configure(text=bmi)
     
-    imc = peso / (altura**2)
-    imc = round (imc,2)
-    
-
-    resultado_imc.configure(text=imc)
-    #resultado_texto = ''
-    
-    if imc < 18.5:
-        #resultado_texto = ('Abaixo do peso')
-        classificacao_imc.configure(text='Abaixo do peso', 
+        if bmi < 18.5:
+            bmi_classification.configure(text='Abaixo do peso', 
                                     text_color=("#C2B00F", '#F0EC02'))
-    elif imc < 25:
-        #resultado_texto = ('Peso normal')
-        classificacao_imc.configure(text='Peso normal',
+        elif bmi < 25:
+            bmi_classification.configure(text='Peso normal',
                                     text_color=("#078007", "#3CE625"))
-    elif imc < 30:
-        #resultado_texto = ('Sobrepeso')
-        classificacao_imc.configure(text='Sobrepeso ',
+        elif bmi < 30:
+            bmi_classification.configure(text='Sobrepeso',
                                     text_color=("#C2B00F", "#F0EC02"))
-    elif imc < 35:
-        #resultado_texto = ('Obesidade 1')
-        classificacao_imc.configure(text='Obesidade 1',
+        elif bmi < 35:
+            bmi_classification.configure(text='Obesidade 1',
                                     text_color='orange')
-    elif imc < 40:
-        #resultado_texto = ('Obesidade 2')
-        classificacao_imc.configure(text='Obesidade 2',
+        elif bmi < 40:
+            bmi_classification.configure(text='Obesidade 2',
                                     text_color='orange')
-    else:
-        #resultado_texto = ('Obesidade mórbida')
-        classificacao_imc.configure(text='Obesidade mórbida',
+        else:
+            bmi_classification.configure(text='Obesidade mórbida',
                                     text_color='red')
-    
-    #classificacao_imc.configure(text=resultado_texto)
+    except ValueError:
+        bmi_result.configure(text="Erro")
+        bmi_classification.configure(text='Entrada inválida! Use números.', text_color='red')
+        
+    except Exception as e:
+        bmi_result.configure(text="Erro")
+        bmi_classification.configure(text=f'Ocorreu um erro: {e}', text_color='red')
 
-
-#Criação da janela principal
+# Main window creation
 app = ctk.CTk()
 app.title('Calculadora de IMC')
 app.geometry('350x375')
+app.resizable(0,0)
 
-#Criação dos campos
-#label
-label_peso = ctk.CTkLabel(app,text='Peso em quilogramas', font=('Arial', 18))
-label_peso.pack(pady=5)
-#entry 
-campo_peso = ctk.CTkEntry(app,placeholder_text='Digite seu peso')
-campo_peso.pack(pady=5)
-#label
-label_altura = ctk.CTkLabel(app,text='Altura em metros', font=('Arial', 18))
-label_altura.pack(pady=5)
-#entry 
-campo_altura = ctk.CTkEntry(app,placeholder_text='Digite sua altura')
-campo_altura.pack(pady=5)
+# Fields creation
+# label
+weight_label = ctk.CTkLabel(app, text='Peso em quilogramas', font=('Arial', 18))
+weight_label.pack(pady=5)
+# entry 
+weight_entry = ctk.CTkEntry(app, placeholder_text='Digite seu peso')
+weight_entry.pack(pady=5)
+# label
+height_label = ctk.CTkLabel(app, text='Altura em metros', font=('Arial', 18))
+height_label.pack(pady=5)
+# entry 
+height_entry = ctk.CTkEntry(app, placeholder_text='Digite sua altura')
+height_entry.pack(pady=5)
 
-#button
-button_calcular = ctk.CTkButton(app,text='Calcular',command=calcular_imc)
-button_calcular.pack(pady=10)
+# button
+calculate_button = ctk.CTkButton(app, text='Calcular', command=calculate_bmi)
+calculate_button.pack(pady=10)
 
-#campo resultado 
-resultado_imc = ctk.CTkLabel(app,text='', font=('Arial', 24))
-resultado_imc.pack(pady=5)
-classificacao_imc = ctk.CTkLabel(app,text='', font=('Arial', 20))
-classificacao_imc.pack(pady=15)
+# result field 
+bmi_result = ctk.CTkLabel(app, text='', font=('Arial', 24))
+bmi_result.pack(pady=5)
+bmi_classification = ctk.CTkLabel(app, text='', font=('Arial', 20))
+bmi_classification.pack(pady=15)
 
 
-#button dark-light mode
+# dark-light mode button
 def switch_event():
     print("switch toggled, current value:", switch_var.get())
     if switch_var.get() == "on":
