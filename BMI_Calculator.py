@@ -54,20 +54,20 @@ app.resizable(0,0)
 
 # Fields creation
 # label
-weight_label = ctk.CTkLabel(app, text='Peso em quilogramas', font=('Arial', 18))
+weight_label = ctk.CTkLabel(app, text='PESO (Kg)', font=('Arial', 16))
 weight_label.pack(pady=5)
 # entry 
 weight_entry = ctk.CTkEntry(app, placeholder_text='Digite seu peso')
 weight_entry.pack(pady=5)
 # label
-height_label = ctk.CTkLabel(app, text='Altura em metros', font=('Arial', 18))
+height_label = ctk.CTkLabel(app, text='ALTURA (m)', font=('Arial', 16))
 height_label.pack(pady=5)
 # entry 
 height_entry = ctk.CTkEntry(app, placeholder_text='Digite sua altura')
 height_entry.pack(pady=5)
 
 # button
-calculate_button = ctk.CTkButton(app, text='Calcular', command=calculate_bmi)
+calculate_button = ctk.CTkButton(app, text='CALCULAR', command=calculate_bmi)
 calculate_button.pack(pady=10)
 
 # result field 
