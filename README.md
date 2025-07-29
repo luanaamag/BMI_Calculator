@@ -12,6 +12,7 @@ A simple and modern Body Mass Index (BMI) calculator built with [CustomTkinter](
 ## Screenshots
 
 ![BMI Calculator Screenshot](images/screenshot.png)
+![BMI Calculator Screenshot](images/screenshot2.png)
 
 ## Installation
 
