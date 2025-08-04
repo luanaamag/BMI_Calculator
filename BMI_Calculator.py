@@ -7,8 +7,14 @@ ctk.set_appearance_mode('dark')
 def calculate_bmi():
     try:
         
-        weight = float(weight_entry.get())
-        height = float(height_entry.get())
+        weight_str = weight_entry.get()
+        height_str = height_entry.get()
+        
+        weight_str = weight_str.replace(',' ,'.')
+        height_str = height_str.replace(',','.')
+        
+        weight = float(weight_str)
+        height = float(height_str)
         
         if height <= 0:
             bmi_result.configure(text="Erro")
